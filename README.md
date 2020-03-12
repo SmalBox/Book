@@ -174,3 +174,22 @@
       - 软件主体设计成高复用模式，加上特定功能的插件以适应特定的系统的功能性需求。当安装了插件，系统将围绕插件表现出相应的行为。
    - 这个框架模式的基本概念是“处理程序模式”。“框架扩展”或者“插件”是“事件处理”模块。
    - 图【framework and entensions(handlers)】
+
+### SAX - an example of a framework (框架举例-SAX)
+
+   - 框架有各种形状尺寸，从大到小都有。开看一下真实的框架是怎么使用的，然我们来看一个小框架：SAX（实际上，SAX不是一个框架。他可以在框架中实现的API。但是为了保持事情简单，我们就当它是个框架）。
+   - XML越来越流行。只有一个结果，就是很多开发者第一时间在SAX（一个简单的XML API）框架中遇到了事件驱动编程。SAX是事件驱动的XML语法分析器。它的工作是打开（解析）XML成可理解的片段。例如，SAX分析器可以分析以下字符串：
+   - 图【XML string】
+   - 解析成如下三个片段：
+   - 图【three pieces】
+   - 使用SAX解析器，你给他一大块XML字符串。它解析XML文本成不同的片段，然后调用适当的预先确定的插件（事件处理程序）去处理片段。
+   - SAX为解析各种XML的特征，诸如打开和关闭标签（startElement，endElement），标签中间的文本，注释，处理指令等等，制定了预定义的插入点。
+   - SAX框架提供了“解析器（Parser）”类和一个抽象类“内容处理器（ContentHandler）”。使用它，首先要创建ContentHandler的子类，并且写一个具体的方法（事件处理模块）去覆写抽象方法。这有个用python写的简单例子。它在控制台打印XML的标签名和标签中的数据。（完整的python SAX例子可以在附件B）。
+   - 图【over-ride abstract methods】
+   - 你扩展“内容处理程序”类和指定事件处理程序：
+      - 使用SAX的 make_parser 工厂函数解析器对象。
+      - 实例化“CustomHandler”类创建一个“myContentHandler”对象
+      - 告诉解析器对象使用“myContentHandler”对象处理XML内容
+      - 将XML文本传给解析器，让事件处理模块去工作
+   - 这有用Pyhton怎样完成的过程：
+   - 图【python parse XML in file】
