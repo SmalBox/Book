@@ -11,4 +11,4 @@
 ### Event-Driven Programming: Introduction, Tutorial, History
    - 作者: Stephen Ferg
    - 《事件驱动编程》
-   - 进度：“观察者模式”章节
+   - 进度：“事件对象”章节
