@@ -239,3 +239,19 @@
    - 最简单的MVC版本被叫做“pull”（拉取）版本。在这个版本中，事件对象（当Model变化时，Model向Views发送的通知）几乎不包含什么信息。Model的描述没有改变，他只是通知Views发生了某种变化。当Views收到了这样的通知，它们必须从Model拉取信息。这样，它们必须询问Model当前状态的信息，并且从这些信息中刷新它们自己的状态。
    - 大多数复杂的MVC版本叫做“push”（推送）版本。在这个版本中，Model 推送变化信息给Views。事件对象发送给Views，对象包含了大量复杂的信息（Model产生的一个完整详尽的变化描述）。当Views收到了这些信息，它就拥有了所有信息，他会根据这些信息更改他自己。
    - MVC的“push”和“pull”版本的根本区别简单来说就是放入事件对象包中的信息总数不同。
+
+### The Registered Handlers pattern in GUI applications (GUI应用程序中的“注册处理程序”模式)
+
+   - 现在你已经熟悉了基本的 观察者/注册 处理程序模式，来让我们看看这个模式在GUI编程中是如何使用的。
+   - 这有另一个程序的代码。在结构上，这段代码和Hotshots天才代理的代码很像，但是名字用了处理程序模式的专用术语，事件是GUI事件。
+   - 在这个例子中，“主体”是分发模块（工作在GUI中的事件循环）。
+   - 为了保持代码简短，程序只包含观察者（“demoHandler”函数是双击鼠标左键的事件处理函数）。
+   - 展示这个处理程序的动作，程序生成一个模仿鼠标左键双击的事件（LeftMouseDoubleClick 事件）。
+   - 图【Python showing Registered Handlers pattern】
+   - 如果你运行这个代码，会得到如下输出：
+      - 图【Handling LeftMouseDoubleClick from mouse】
+   - 在如下语句中：
+      - 图【demoDispatcher.registerObserver( demoHandler, MOUSE_LEFT_DOUBLE)】
+   - 和这句：
+      - 图【observer.eventHandler = argEventHandler】
+   - 程序在床底“demoHandler”函数对象的引用。它这是将函数作为“全功能对象”（支持所有操作，基本的包括：作为参数传递、从函数返回、赋值给其他变量）。这不是所有的编程语言都支持的，也就是意味着，在不同的编程语言中，实现观察者/注册处理程序模式的方式会很不一样。
