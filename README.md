@@ -11,4 +11,4 @@
 ### Event-Driven Programming: Introduction, Tutorial, History
    - 作者: Stephen Ferg
    - 《事件驱动编程》
-   - 进度：“Python中的注册事件处理程序-绑定”章节
+   - 进度：“回调编程”章节
