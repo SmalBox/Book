@@ -255,3 +255,25 @@
    - 和这句：
       - 图【observer.eventHandler = argEventHandler】
    - 程序在床底“demoHandler”函数对象的引用。它这是将函数作为“全功能对象”（支持所有操作，基本的包括：作为参数传递、从函数返回、赋值给其他变量）。这不是所有的编程语言都支持的，也就是意味着，在不同的编程语言中，实现观察者/注册处理程序模式的方式会很不一样。
+
+### Registering Event-Handlers in Python - "Binding" (Pyhton中的注册事件处理程序-“绑定”)
+
+   - 这些是“注册处理程序”模式后的基本思想。现在让我们看一下在Python和Java的GUI应用中“注册处理程序”模式是什么样的。
+   - 开源动态语言如：Python、Perl 和 Ryby 通常提供多样的开源GUI框架接口开支持GUI编程。在Python中，也提供了一些这样的接口。最流行的是tkinter（向Tcl/Tk提供的接口）和wxPython（向wxWidgets提供的接口）。
+   - 使用这些接口的基本概念是非常相似的。在接下来的讨论中，我会用Python和tkinter的例子，来阐述在GUI编程中“注册处理程序”模式的样子。
+   - 在Python和tkinter中，所有的GUI事件都术语一个单独的类：“event”。事件处理程序带着GUI窗口小部件（按钮之类的）注册到程序中，为了处理特定类型的事件，比如鼠标点击，按键按下。在PYthon中，注册一个事件处理程序的过程叫做“binding”（）绑定。
+   - 这有个简单的例子。假设我们的程序已经有了一个事件处理程序（一个函数或者方法）叫做“OKButtonEventHandler”。它的工作是处理发生在GUI中的“OK”按钮上的事件。
+   - 注意，在Python中没有特别或者神奇的事情发生，Python中没有叫做“OkButtonEventHandler”的程序（只要我们想，我们可以将这个程序的名字叫做“Floyd”或者“Foobar”都可以）。我们将要看到是Python和Java中唯一不同的地方。
+   - 接下来的代码片段创建了在观察者模式中的“subject 主体”窗口小部件。这个主体是一个GUI窗口小部件（一个按钮），它可以展示文本“OK”。这个OK按钮对象是一个Tkiner.Button类的实例对象。
+   - 图【OkButton = Tkinter.Button(parent, text="Ok")】
+   - 在调用Button类的构造函数中，“parent”参数链接了按钮对象到其所有者的GUI对象上（可能是框架或者窗口）。
+   - Tkinter小部件提供了一个叫做“bind 绑定”的方法来将事件绑定到窗口小部件上。更精确的说，“bind”方法提供了一种绑定或者说结合三个不同的事情：
+      - 一个事件类型（例如，鼠标左键点击，或者在键盘按下回车键）。
+      - 一个窗口小部件（例如，在GUI上一个特定的按钮窗口小部件）。
+   - 例如，我们想在窗口的“关闭”按钮上绑定一个鼠标左键单击的函数或者方法：“closeProgram”。想要的效果是，当用户鼠标点击“关闭”按钮时，调用“closeProgram”关闭窗口。
+   - 这有一个代码片段，绑定了一个OKButtonEventHandler程序和键盘事件（“\<Return>”）的组合到OKButton窗口小部件：
+   - 图【OkButton.bind("\<Return>", OkButtonEventHandler)】
+   - 该语句将作为观察者的OkButton窗口小部件和OkButtonEventHander函数注册到键盘事件“\<Return>”中（当Ok按钮对象获得键盘焦点时发生的事件）。
+   - 这有另一段代码片段（可能就在同一个程序中发生，就在上一个代码之后）。它绑定了OkButtonEventHandler程序和鼠标左键点击事件到Ok按钮窗口小部件：
+   - 图【OkButton.bind("\<Button-1>", OkButtonEventHandler)】
+   - 当这两个事件中的任何一个发生了，事件将事件对象作为参数发送给OkButtonEventHandler函数。OkButtonEventHandler函数可以（如果他想）询问事件对象，并且决定是否触发一个按键按下或者鼠标点击事件。
