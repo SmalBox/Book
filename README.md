@@ -277,3 +277,12 @@
    - 这有另一段代码片段（可能就在同一个程序中发生，就在上一个代码之后）。它绑定了OkButtonEventHandler程序和鼠标左键点击事件到Ok按钮窗口小部件：
    - 图【OkButton.bind("\<Button-1>", OkButtonEventHandler)】
    - 当这两个事件中的任何一个发生了，事件将事件对象作为参数发送给OkButtonEventHandler函数。OkButtonEventHandler函数可以（如果他想）询问事件对象，并且决定是否触发一个按键按下或者鼠标点击事件。
+
+### Registering Event-Handlers in Java - "listeners" (Java中的注册事件处理程序-“监听”)
+
+   - Java也支持GUI事件处理程序注册技术，但是它的方式和Python的有些不一样。
+   - **Pass**
+
+### Callback programming (回调编程)
+
+   - 当你读GUI框架的文档的时候，你会注意到观察者/事件处理程序叫做“callback”，因为主体窗口小部件会“回调”它们去处理事件。所以你经常看到这种编程类型叫做“回调编程”。
