@@ -320,3 +320,16 @@
    - 依赖于使用语言的能力，应用提出一个通用异常并伴随一条描述错误的信息，或者可以对指定的问题类型，定义指定的异常。一个栈的实例可以定义为：
       - “StackEmptyException” 栈空异常，当栈是空的并且受到“Pop()”请求时提出此异常。
       - “StackOverflowException” 栈溢出异常，当栈满了，并且收到了“Push()”请求时提出此异常。
+
+### State Machines (状态机)
+
+   - 在一些案例中，状态机是有效的思考具有生命周期对象（有状态的计算机应用）的方法。在它的生命周期中，有状态对象通过相应事务（事件）来在不同状态之间切换。
+   - 对象的这种行为叫做“有限状态机 Finite State Machine”（FSM）或者“定向有限状态机 Directed Finite Automaton”（DFA）。描述有限状态机的典型方式是用“状态事务图 State Transition Diagram”（STD）。在STD中，圆圈代表状态，用事务走向的事件名标记的箭头代表了事务。
+   - 这有个STD的例子，它代表了一个人的生活和婚姻历史（由文化规定，同一时间只能由一个配偶）。
+   - 图【STD for life and marriage history of a person】
+   - 在STD中，状态是：“SINGLE 单身”、“MARRIED 已婚”、“DEAD 死亡”。当一个人开始他的生活，它是单身的（开始的状态是SINGLE）。他可能还没有结婚就死亡了，或者他结婚了。他可能在结婚之后死亡，或者通过离婚或丧偶重新回到单身。DEAD是“终点状态”（没有事件事务从这里出去）。
+   - 这个Person类的伪代码如下：
+   - 图【Person class】
+   - 在上述我们讨论的状态中，我们使用“state 状态”和“state information”状态信息指人的所有有状态信息，是对象实例化变量的完整集合。但是当讨论到STD和FSM时，我们在有限状态机中使用“state”这个词去指特定的没有关联的状态。
+   - 遗憾的是，还没有标准术语来区分“state”这个单词的两种意思。Michael Jackson 使用术语“state vector 状态向量”来指第一种情况（“vector”变量列表包含一个对象的状态信息）。程序员经常使用“status”（如“status_flag”,“status_indicator”）来指第二种情况。
+   - 在本文余下部分，一般上下文会指出我用的是哪种“state”。当有可能产生混淆时，我会使用“state vector”（或者“state_information”）和“status”去让事情保持清晰。
