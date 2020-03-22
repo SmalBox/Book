@@ -281,7 +281,49 @@
 ### Registering Event-Handlers in Java - "listeners" (Java中的注册事件处理程序-“监听”)
 
    - Java也支持GUI事件处理程序注册技术，但是它的方式和Python的有些不一样。
-   - **Pass**
+   - Java提供了多种GUI编程的选择（AWT和Swing）。这允许程序员可以用两种方式创建GUI的视觉层，并且监听GUI事件。
+   - 对于GUI的事件处理方面，java.awt.event包提供了许多不同的事件对象类型：
+      - ActionEvent        InvocationEvent
+      - AdjustmentEvent    ItemEvent
+      - ComponentEvent     KeyEvent
+      - ContainerEvent     MouseEvent
+      - FocusEvent         MouseWheelEvent
+      - InputEvent         PaintEvent
+      - InputMethodEvent   TextEvent
+   - 这些事件的类型每个都包含适合它类型的变量和方法。例如，“MouseEvent”对象包含鼠标事件的变量个方法，“KeyEvent”对象包含键盘事件的变量个方法。举个例子：
+      - “MouseEvent.getButton()”传递了鼠标按钮引发的事件。
+      - “MouseEvent.getClickCount()”传递了触发鼠标点击的数量的事件
+      - “MouseEvent.getPoint()”告诉在GUI组件中鼠标光标位置的x，y坐标。
+      - “KeyEvent.getKeyChar()”告诉了键盘按下了哪个按键。
+   - java.awt.event包也提供了通用了事件监听接口和专门监听接口集合来扩展它。专门监听接口如：
+      - ActionListener       MouseListener
+      - ContainerListener    MouseMotionListener
+      - FocusListener        MouseWheelListener
+      - InputMethodListener  TextListener
+      - ItemListener         WindowFocusListener
+      - KeyListener          WindowListener
+   - 这些专门的监听接口围绕着不同的事件类型建立。这些处理相同类型的事件对象（一个监听接口是方法（事件处理程序）的集合）。例如，在鼠标监听接口中的方法处理鼠标事件，“KeyListener”接口的方法处理“KeyEvent”事件，诸如此类。
+   - 在接口中，事件处理程序具有描述性的硬编码名称。例如，“MouseListener”接口提供五个事件处理程序方法：
+      - mouseClicked(MouseEvent e)
+      - mouseEntered(MouseEvent e)
+      - mouseExited(MouseEvent e)
+      - mousePressed(MouseEvent e)
+      - mouseReleased(MouseEvent e)
+   - GUI由多个GUI组件（窗口小部件）组成，例如面板、列表、按钮等。当GUI程序运行起来，窗口小部件是GUI事件（鼠标点击、按键等）的来源。
+   - 就观察者而言，窗口小部件是模式的“主体”。因此，每个窗口小部件必须提供一些让观察者注册的方法。在Java中，这通过每个Java的GUI类（JPanel、Button、JList等）提供注册观察者对象的方法的方式完成。JPanel提供了一个“addMouseListener()”方法来注册鼠标事件的观察者；JButton提供“addActionListener()；诸如此类。
+   - 建立GUI程序，一个Java程序必须做如下任务：
+      - 创建和定位GUI和窗口小部件的视觉化组件。
+      - 创建一个或多个监听对象（在适合的监听接口中，对象实现了所有的事件处理程序的方法）。
+      - 使用窗口小部件的“add\[xxx]Listener()”来注册监听对象和适合的主体窗口小部件。
+   - 当GUI事件（例如鼠标点击事件）在主体窗口小部件发生时，在注册监听对象中，窗口小部件调用“mouseClicked()”事件处理程序方法，并将鼠标点击事件传递给它。
+   - 这有个基于Sun公司教程的代码示例“怎样写一个鼠标监听”：
+   - 图【How to Write a Mouse Listener】
+   - 在代码中，“inputArea”对象是事件生成器。“mouseClicked()”方法是事件处理程序。它也是注册处理程序/观察者模式的例子。在观察者模式中“inputArea”是主体，如下这行：
+   - 图【inputArea.addMouseListener(this)】
+   - 在“inputArea”中注册的“this”（DemoGUI）是观察者。
+   - 有趣的是，则个例子展示了Java中是怎么样完成多继承的。在这个例子中，DemoGUI类是GUI窗口小部件也是监听者。它是一个从JPanel继承的JPanel，所以对于inputArea窗口小部件来说它是GUI容器对象。并且他还是监听者（它实现了“MouseListener”接口中的方法（如“MouseClicked”））。
+   - 注意在Java中，事件处理程序方法通过listener接口实现方法的定义，所以名字（如“mouseClick”）是由接口来决定的，所以在起名字的问题上程序员没有选择。Python中的容器，我们可以看到，程序员可以以他们认为合适的任何方式给事件处理方法起名字。
+
 
 ### Callback programming (回调编程)
 
