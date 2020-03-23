@@ -254,7 +254,7 @@
       - 图【demoDispatcher.registerObserver( demoHandler, MOUSE_LEFT_DOUBLE)】
    - 和这句：
       - 图【observer.eventHandler = argEventHandler】
-   - 程序在床底“demoHandler”函数对象的引用。它这是将函数作为“全功能对象”（支持所有操作，基本的包括：作为参数传递、从函数返回、赋值给其他变量）。这不是所有的编程语言都支持的，也就是意味着，在不同的编程语言中，实现观察者/注册处理程序模式的方式会很不一样。
+   - 程序在传递“demoHandler”函数对象的引用。它这是将函数作为“全功能对象”（支持所有操作，基本的包括：作为参数传递、从函数返回、赋值给其他变量）。这不是所有的编程语言都支持的，也就是意味着，在不同的编程语言中，实现观察者/注册处理程序模式的方式会很不一样。
 
 ### Registering Event-Handlers in Python - "Binding" (Pyhton中的注册事件处理程序-“绑定”)
 
